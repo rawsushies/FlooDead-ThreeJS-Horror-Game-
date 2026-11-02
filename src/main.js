@@ -188,7 +188,7 @@ let pointLight; // For candle-like light
 let candleMixer;
 // Load the .glb model for the candle
 loader.load(
-  './images/models/flashlight_electricity_lamp_the_light.glb',
+  '/images/models/flashlight_electricity_lamp_the_light.glb',
   function (gltf) {
     lightObject = gltf.scene;
 

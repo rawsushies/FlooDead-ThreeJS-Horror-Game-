@@ -5,7 +5,7 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
 
   // Load and add chair model to the scene
   loader.load('/images/models/day_20__old_office_chair.glb', (gltf) => {
-      chair = gltf.scene;
+      const chair = gltf.scene;
       chair.position.set(40, 2, -42);
       chair.scale.set(7, 5, 5);
       chair.rotation.x = Math.PI / 4;
@@ -19,11 +19,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const chairBox = new THREE.Box3().setFromObject(chair);
       chairBox.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(chairBox);
-  });
+  }, undefined, (err) => console.warn('Could not load chair model:', err));
 
   // Load and add desk model to the scene
   loader.load('/images/models/office_desk.glb', (gltf) => {
-      desk = gltf.scene;
+      const desk = gltf.scene;
       desk.position.set(40, 0.050, 33);
       desk.scale.set(0.130, 0.130, 0.130);
       desk.rotation.y = Math.PI / -1;
@@ -36,11 +36,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const deskBox = new THREE.Box3().setFromObject(desk);
       deskBox.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(deskBox);
-  });
+  }, undefined, (err) => console.warn('Could not load desk model:', err));
 
   // Load and add air conditioner model to the scene
   loader.load('/images/models/old_aircon.glb', (gltf) => {
-      aircon = gltf.scene;
+      const aircon = gltf.scene;
       aircon.position.set(34, 9, 28);
       aircon.scale.set(0.8, 0.8, 0.8);
       aircon.rotation.y = Math.PI / -2;
@@ -53,7 +53,7 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const airconBox = new THREE.Box3().setFromObject(aircon);
       airconBox.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(airconBox);
-  });
+  }, undefined, (err) => console.warn('Could not load aircon model:', err));
   /*
   // Load and add flower model to the scene
   loader.load('/images/models/flowering_cannabis_plant_in_a_pot.glb', (gltf) => {
@@ -74,7 +74,7 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
 
   // Load and add frame model to the scene
   loader.load('/images/models/picture_frame.glb', (gltf) => {
-      frame = gltf.scene;
+      const frame = gltf.scene;
       frame.position.set(46, 0, 43);
       frame.scale.set(1.3, 1.3, 1.3);
       frame.rotation.y = Math.PI / -2;
@@ -87,14 +87,10 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const frameBox = new THREE.Box3().setFromObject(frame);
       frameBox.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(frameBox);
-  });
-
-
-
-
+  }, undefined, (err) => console.warn('Could not load frame model:', err));
 
   loader.load('/images/models/isometric_office.glb', (gltf) => {
-    design1 = gltf.scene;
+    const design1 = gltf.scene;
     design1.position.set(10, 0, -30);
     design1.scale.set(6, 5, 6);
     design1.rotation.y = Math.PI / 100;
@@ -126,14 +122,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
     }
 
     handleCameraBounce(camera, design1Box);
-  });
-
-
-
+  }, undefined, (err) => console.warn('Could not load isometric_office model:', err));
 
   // Load and add office of a crane operator model to the scene
   loader.load('/images/models/office_of_a_crane_operator.glb', (gltf) => {
-      design2 = gltf.scene;
+      const design2 = gltf.scene;
       design2.position.set(-75, -1, 40);
       design2.scale.set(7, 5, 4);
       design2.rotation.y = Math.PI / -2;
@@ -146,12 +139,10 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const design2Box = new THREE.Box3().setFromObject(design2);
       design2Box.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(design2Box);
-  });
-
-
+  }, undefined, (err) => console.warn('Could not load office_of_a_crane_operator model:', err));
 
   loader.load('/images/models/building_hallway.glb', (gltf) => {
-    design3 = gltf.scene;
+    const design3 = gltf.scene;
     design3.position.set(-115, -39, -40);
     design3.scale.set(0.120, 0.110, 0.120);
     design3.rotation.y = Math.PI;
@@ -183,14 +174,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
     }
 
     handleCameraBounce(camera, design3Box);
-  });
-
-
-
+  }, undefined, (err) => console.warn('Could not load building_hallway model:', err));
 
   // Load and add checkered tile floor model to the scene, but not include it for collision detection
   loader.load('/images/models/checkered_tile_floor.glb', (gltf) => {
-      floor = gltf.scene;
+      const floor = gltf.scene;
       floor.traverse((child) => {
           if (child.isMesh && child.material) {
               child.material.roughness = 0;
@@ -203,11 +191,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       floor.castShadow = true;
       floor.receiveShadow = true;
       scene.add(floor);
-  });
+  }, undefined, (err) => console.warn('Could not load checkered_tile_floor model:', err));
 
   // Load and add waiting chair model to the scene
   loader.load('/images/models/waiting_chair.glb', (gltf) => {
-      hallchairs = gltf.scene;
+      const hallchairs = gltf.scene;
       hallchairs.position.set(-15, -1, 47);
       hallchairs.scale.set(6, 6, 6);
       hallchairs.rotation.y = Math.PI;
@@ -220,11 +208,11 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
       const hallchairsBox = new THREE.Box3().setFromObject(hallchairs);
       hallchairsBox.expandByVector(new THREE.Vector3(shrinkFactor, shrinkFactor, shrinkFactor));  // Shrink collision volume
       modelBoundingBoxes.push(hallchairsBox);
-  });
+  }, undefined, (err) => console.warn('Could not load waiting_chair model:', err));
 
   // Load and add low poly office cubicle model to the scene
   loader.load('/images/models/low_poly_90s_office_cubicle.glb', (gltf) => {
-    cheaproom = gltf.scene;
+    const cheaproom = gltf.scene;
     cheaproom.position.set(39, -1, 6.2);
     cheaproom.scale.set(9, 6, 9);
     cheaproom.rotation.y = Math.PI / 2;
@@ -382,7 +370,7 @@ export function setupEnvironment({ scene, loader, models, modelBoundingBoxes }) 
   });
 
   // Load and add falling ceiling model to the scene
-  loader.load('images/models/abandoned_office_ceiling.glb', (gltf) => {
+  loader.load('/images/models/abandoned_office_ceiling.glb', (gltf) => {
     const fallceiling = gltf.scene;
     fallceiling.position.set(-27, -16.3, 54);
     fallceiling.scale.set(1, 12, 1);

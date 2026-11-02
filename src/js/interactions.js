@@ -173,7 +173,7 @@ export function setupInteractions({
     if (hasKey && !hasUsedKey && boundDoor === door) {
       openDoor();
     } else {
-      alert('You need the correct key to open the door!');
+      showNoKeyNote();
     }
   }
 
@@ -342,9 +342,16 @@ export function setupInteractions({
       onKeyPress(event);
     }
 
-    if (key === 'e' && !isInteracting && !deviceInteracted && isNearDevice()) {
-      startPasswordInput();
-      return;
+    if (key === 'e' && !isInteracting) {
+      if (!deviceInteracted && isNearDevice()) {
+        startPasswordInput();
+        return;
+      }
+      const distanceToDoor = camera.position.distanceTo(door.position);
+      if (distanceToDoor < 12) {
+        onDoorPress(event);
+        return;
+      }
     }
 
     if (key === 'q' && isInteracting) {
